@@ -31,15 +31,15 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 SECRET_KEY = config("SECRET_KEY", default="unsafe-secret-key")
 DEBUG = config("DEBUG", default=False, cast=bool)
-ALLOWED_HOSTS = ["gestionstock-production.up.railway.app", "localhost", "127.0.0.1"]
+ALLOWED_HOSTS = ["*"]
 
 DATABASES = {
-    'default': dj_database_url.parse(
-        config("DATABASE_URL"),
-        conn_max_age=600,
-        ssl_require=True
-    )
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
+    }
 }
+
 
 CLOUDINARY_STORAGE = {
     'CLOUD_NAME': config("CLOUDINARY_STORAGE_CLOUD_NAME"),
